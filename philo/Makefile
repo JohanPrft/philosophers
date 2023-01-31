@@ -28,7 +28,7 @@ DIR_HEADERS		=	include/
 
 HEADERS_LIST	=	philo.h
 
-SRCS_LIST		=	main.c		init.c		utils.c
+SRCS_LIST		=	main.c		init.c		utils.c		idk.c
 
 HEADERS			=	${HEADERS_LIST:%.h=${DIR_HEADERS}%.h}
 
@@ -36,7 +36,7 @@ OBJS			=	${SRCS_LIST:%.c=${DIR_OBJS}%.o}
 
 # ---- Compilation ---- #
 
-CFLAGS			=	-Wall -Wextra -Werror
+CFLAGS			=	-Wall -Wextra -pthread ######### ADD -Werror !!!!!!!! #########
 
 
 # ---- Commands ---- #
@@ -57,7 +57,7 @@ ${NAME}			:	${DIR_OBJS} ${OBJS} ${HEADERS}
 # ---- Compiled Rules ---- #
 
 ${OBJS}			:	${DIR_OBJS}%.o:	${DIR_SRCS}%.c ${HEADERS} Makefile
-					${CC} ${CFLAGS} -I ${DIR_HEADERS} -c $< -o $@ -pthread
+					${CC} ${CFLAGS} -I ${DIR_HEADERS} -c $< -o $@
 
 ${DIR_OBJS}		:
 					${MKDIR} ${DIR_OBJS}

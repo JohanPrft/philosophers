@@ -15,6 +15,10 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
+# include <pthread.h>
+#include <sys/time.h>
+
+typedef struct timeval t_tval;
 
 typedef struct s_rules {
 	int	nb_philo;
@@ -24,9 +28,9 @@ typedef struct s_rules {
 }	t_rules;
 
 typedef struct s_philo {
-	t_rules		*param;
-	//p_thread	*philos;
 	int			index;
+	t_rules		*param;
+	t_tval		time;
 }	t_philo;
 
 // INIT.C

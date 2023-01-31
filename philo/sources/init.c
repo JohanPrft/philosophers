@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:19 by jprofit           #+#    #+#             */
-/*   Updated: 2023/01/30 18:59:33 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/01/31 11:07:20 by johan            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,19 +56,37 @@ int	fill_struct(int argc, char **argv, t_rules *param)
 	return (1);
 }
 
+void	*routine(void *void_philo)
+{
+	t_philo *philo;
+	t_rules	*rules;
+
+	philo = (t_philo *)void_philo;
+	rules = philo->param;
+	return (NULL);
+}
+
 int	init_philo(t_rules *rules, t_philo *philo)
 {
+	pthread_t	*thread_id;
 	int	i;
 
-	philo = malloc(sizeof(t_philo) * (rules->nb_philo));
+	thread_id = malloc(sizeof(thread_id) * (rules->nb_philo));
 	if (!philo)
 		return (0);
 	i = 0;
 	while (++i <= rules->nb_philo)
 	{
-		philo[i].index = i;
-		printf("%i", philo[i].index);
+		philo[i - 1].index = i;
+		if (pthread_create(&thread_id[i - 1], NULL, &routine, (void *)&philo[i - 1]))
+			return (0);
+		printf("%i -> ", philo[i - 1].index);
+		gettimeofday(&philo->time, NULL);
+		printf("%ld\n", philo->time.tv_sec);
 	}
+	// death_check
+	// exit
+	free (thread_id);
 	return (1);
 }
 
