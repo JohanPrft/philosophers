@@ -34,3 +34,16 @@ int	ft_atoi(const char *str)
 	}
 	return (sign * res);
 }
+
+long long	get_time_ms(void)
+{
+	t_tval	time;
+
+	gettimeofday(&time, NULL);
+	return (time.tv_sec * 1000 + time.tv_usec / 1000);
+}
+
+long long	time_diff_ms(long long last, long long now)
+{
+	return (now - last);
+}

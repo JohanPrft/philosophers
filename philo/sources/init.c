@@ -33,7 +33,7 @@ int	check_only_int(char *str)
 	return (1);
 }
 
-int	fill_struct(int argc, char **argv, t_rules *param)
+int fill_rules(char **argv, int argc, t_rules *param)
 {
 	int	i;
 
@@ -42,55 +42,39 @@ int	fill_struct(int argc, char **argv, t_rules *param)
 		if (!check_only_int(argv[i]))
 			return (0);
 	param->nb_philo = ft_atoi(argv[1]);
-	if (param->nb_philo < 1)
-		return (0);
 	param->time_to_die = ft_atoi(argv[2]);
-	if (param->time_to_die < 1)
-		return (0);
 	param->time_to_eat = ft_atoi(argv[3]);
-	if (param->time_to_eat < 1)
-		return (0);
 	param->time_to_sleep = ft_atoi(argv[4]);
-	if (param->time_to_sleep < 1)
+	if (param->nb_philo < 2 || param->nb_philo > 200 ||param->time_to_die < 0 \
+	|| param->time_to_eat < 0 || param->time_to_sleep < 0)
 		return (0);
-	return (1);
-}
-
-void	*routine(void *void_philo)
-{
-	t_philo *philo;
-	t_rules	*rules;
-
-	philo = (t_philo *)void_philo;
-	rules = philo->param;
-	return (NULL);
-}
-
-int	init_philo(t_rules *rules, t_philo *philo)
-{
-	pthread_t	*thread_id;
-	int	i;
-
-	thread_id = malloc(sizeof(thread_id) * (rules->nb_philo));
-	if (!philo)
-		return (0);
-	i = 0;
-	while (++i <= rules->nb_philo)
+	if (argv[5])
 	{
-		philo[i - 1].index = i;
-		if (pthread_create(&thread_id[i - 1], NULL, &routine, (void *)&philo[i - 1]))
+		param->max_meal = ft_atoi(argv[5]);
+		if (param->max_meal < 0)
 			return (0);
-		printf("%i -> ", philo[i - 1].index);
-		gettimeofday(&philo->time, NULL);
-		printf("%ld\n", philo->time.tv_sec);
 	}
-	// death_check
-	// exit
-	free (thread_id);
+	else
+		param->max_meal = -1;
 	return (1);
 }
 
-	// int	i;
+int	init_philo(t_rules *rules, t_philo **philo)
+{
+	int i;
 
-	// 	pthread_create(, &table[i]);
-	// }
+	*philo = malloc(sizeof(**philo) * rules->nb_philo);
+	if (!*philo)
+		return (0);
+	i = -1;
+	while (++i < rules->nb_philo)
+	{
+		(*philo)[i].index = i;
+		(*philo)[i].param = rules;
+		(*philo)[i].state = INIT;
+		(*philo)[i].right_fork_id = i;
+		(*philo)[i].left_fork_id = (i + 1) % rules->nb_philo;
+		(*philo)[i].last_meal = -1;
+	}
+	return (1);
+}

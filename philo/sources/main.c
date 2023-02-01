@@ -12,17 +12,19 @@
 
 #include "../include/philo.h"
 
-
+// philo pointer is needed for it to be an array
 int	main(int argc, char **argv)
 {
 	t_rules	rules;
-	t_philo	philo;
+	t_philo	*philo;
 
 	if (argc < 5 || argc > 6)
 		return (write_error());
-	if (!fill_struct(argc, argv, &rules))
+	if (!fill_rules(argv, argc, &rules))
 		return (write_error());
 	if (!init_philo(&rules, &philo))
+		return (1);
+	if (!create_threads(&rules, philo))
 		return (1);
 	return (0);
 }
