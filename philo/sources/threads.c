@@ -12,6 +12,11 @@
 
 #include "../include/philo.h"
 
+void	philo_eat(t_rules *rules, t_philo *philo)
+{
+
+}
+
 void	*routine(void *void_philo)
 {
 	t_philo *philo;
