@@ -47,3 +47,13 @@ long long	time_diff_ms(long long last, long long now)
 {
 	return (now - last);
 }
+
+void	usleep_better(int usec)
+{
+	int	i;
+
+	usec /= 10;
+	i = -1;
+	while (++i <= 10)
+		usleep(usec);
+}

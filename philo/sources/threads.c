@@ -1,21 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   idk.c             	                                :+:      :+:    :+:   */
+/*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:19 by jprofit           #+#    #+#             */
-/*   Updated: 2023/01/31 11:07:20 by johan            ###   ########.fr       */
+/*   Updated: 2023/02/06 11:27:14 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
-
-void	philo_eat(t_rules *rules, t_philo *philo)
-{
-
-}
 
 void	*routine(void *void_philo)
 {
@@ -24,13 +19,15 @@ void	*routine(void *void_philo)
 
 	philo = (t_philo *)void_philo;
 	rules = philo->param;
-//	while (philo->state != DEAD)
-//	{
-		// eat;
+    philo->last_meal = get_time_ms();
+	while (rules->nb_dead == 0)
+	{
+		// last check_dead(rules, )
+		action_and_print(rules, philo->index, "is sleeping", rules->time_to_sleep);
 		// if eat max times
 		// sleep if have eat
 		// think
-//	}
+	}
 	return (NULL);
 }
 
@@ -48,11 +45,14 @@ int	create_threads(t_rules *rules, t_philo *philo)
 	int	i;
 
 	i = -1;
+	rules->start_time_ms = get_time_ms();
 	while (++i < rules->nb_philo)
 	{
-		printf ("left fork id %i\n", philo[i].left_fork_id);
+		//printf ("left fork id   %i\n", philo[i].left_fork_id);
+		//printf ("right fork id  %i\n", philo[i].right_fork_id);
 		if (pthread_create(&(philo[i].thread_id), NULL, &routine, (void *)&(philo[i])))
 			return (0);
+
 	}
 	// death
 	exit_threads(rules, philo);

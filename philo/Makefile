@@ -28,7 +28,8 @@ DIR_HEADERS		=	include/
 
 HEADERS_LIST	=	philo.h
 
-SRCS_LIST		=	main.c		init.c		utils.c		threads.c
+SRCS_LIST		=	main.c		init.c		utils.c		threads.c		mutex.c	\
+					philo_actions.c
 
 HEADERS			=	${HEADERS_LIST:%.h=${DIR_HEADERS}%.h}
 

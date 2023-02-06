@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: johan <johan@student.42.fr>                +#+  +:+       +#+        */
+/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 16:01:19 by jprofit           #+#    #+#             */
-/*   Updated: 2023/01/31 11:07:20 by johan            ###   ########.fr       */
+/*   Updated: 2023/02/06 10:50:11 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,29 +33,33 @@ int	check_only_int(char *str)
 	return (1);
 }
 
-int fill_rules(char **argv, int argc, t_rules *param)
+int fill_rules(char **argv, int argc, t_rules *rules)
 {
 	int	i;
 
+	rules = malloc(sizeof(*rules));
 	i = 0;
 	while (++i < argc)
 		if (!check_only_int(argv[i]))
 			return (0);
-	param->nb_philo = ft_atoi(argv[1]);
-	param->time_to_die = ft_atoi(argv[2]);
-	param->time_to_eat = ft_atoi(argv[3]);
-	param->time_to_sleep = ft_atoi(argv[4]);
-	if (param->nb_philo < 2 || param->nb_philo > 200 ||param->time_to_die < 0 \
-	|| param->time_to_eat < 0 || param->time_to_sleep < 0)
+	rules->nb_philo = ft_atoi(argv[1]);
+	rules->time_to_die = ft_atoi(argv[2]);
+	rules->time_to_eat = ft_atoi(argv[3]);
+	rules->time_to_sleep = ft_atoi(argv[4]);
+	if (rules->nb_philo < 2 || rules->nb_philo > 200 ||rules->time_to_die < 0 \
+	|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
 		return (0);
 	if (argv[5])
 	{
-		param->max_meal = ft_atoi(argv[5]);
-		if (param->max_meal < 0)
+		rules->max_meal = ft_atoi(argv[5]);
+		if (rules->max_meal < 0)
 			return (0);
 	}
 	else
-		param->max_meal = -1;
+		rules->max_meal = -1;
+	rules->nb_dead = 0;
+	if (mutex_init(rules) != 1)
+		return (0);
 	return (1);
 }
 

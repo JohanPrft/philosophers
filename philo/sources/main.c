@@ -26,5 +26,6 @@ int	main(int argc, char **argv)
 		return (1);
 	if (!create_threads(&rules, philo))
 		return (1);
+	destroy_mutex(&rules);
 	return (0);
 }
