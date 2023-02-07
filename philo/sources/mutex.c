@@ -27,6 +27,13 @@ int	mutex_init(t_rules *rules)
 		pthread_mutex_destroy(&rules->mutex_rfork);
 		return (0);
 	}
+	if (pthread_mutex_init(&rules->mutex_ate_enough, NULL) != 0)
+	{
+		pthread_mutex_destroy(&rules->mutex_nb_dead);
+		pthread_mutex_destroy(&rules->mutex_rfork);
+		pthread_mutex_destroy(&rules->mutex_lfork);
+		return (0);
+	}
 	return (1);
 }
 

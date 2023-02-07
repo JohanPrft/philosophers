@@ -12,19 +12,26 @@
 
 #include "../include/philo.h"
 
-void	check_dead(t_rules *rules, t_philo **philo)
+void	check_dead(t_rules *rules, t_philo *philo)
 {
-	int	i;
-
-	i = -1;
-	while (++i < rules->nb_philo)
+	if (get_time_ms() - philo->last_meal > rules->time_to_die)
 	{
-		if (philo[i]->state == DEAD)
-		{
-			pthread_mutex_lock(&rules->mutex_nb_dead);
-			rules->nb_dead++;
-			pthread_mutex_unlock(&rules->mutex_nb_dead);
-		}
+		philo->state = DEAD;
+		pthread_mutex_lock(&rules->mutex_nb_dead);
+		rules->nb_dead++;
+		pthread_mutex_unlock(&rules->mutex_nb_dead);
+	}
+}
+
+void	check_eat(t_rules *rules, t_philo *philo)
+{
+	if (rules->max_meal == -1)
+		return;
+	if (philo->nb_meal == rules->max_meal)
+	{
+		pthread_mutex_lock(&rules->mutex_nb_dead);
+		rules->ate_enough++;
+		pthread_mutex_unlock(&rules->mutex_nb_dead);
 	}
 }
 

@@ -39,7 +39,6 @@ OBJS			=	${SRCS_LIST:%.c=${DIR_OBJS}%.o}
 
 CFLAGS			=	-Wall -Wextra -g -pthread ######### ADD -Werror !!!!!!!! #########
 
-
 # ---- Commands ---- #
 
 MKDIR			=	mkdir -p

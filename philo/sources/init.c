@@ -37,7 +37,6 @@ int fill_rules(char **argv, int argc, t_rules *rules)
 {
 	int	i;
 
-	rules = malloc(sizeof(*rules));
 	i = 0;
 	while (++i < argc)
 		if (!check_only_int(argv[i]))
@@ -49,7 +48,7 @@ int fill_rules(char **argv, int argc, t_rules *rules)
 	if (rules->nb_philo < 2 || rules->nb_philo > 200 ||rules->time_to_die < 0 \
 	|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
 		return (0);
-	if (argv[5])
+	if (argc == 6)
 	{
 		rules->max_meal = ft_atoi(argv[5]);
 		if (rules->max_meal < 0)
@@ -60,6 +59,8 @@ int fill_rules(char **argv, int argc, t_rules *rules)
 	rules->nb_dead = 0;
 	if (mutex_init(rules) != 1)
 		return (0);
+	rules->ate_enough = 0;
+	rules->all_ate_enough = 0;
 	return (1);
 }
 
