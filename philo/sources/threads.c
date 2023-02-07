@@ -22,7 +22,7 @@ void	*routine(void *void_philo)
     philo->last_meal = get_time_ms();
 	while (rules->nb_dead == 0)
 	{
-		// last check_dead(rules, )
+		//check_dead(rules, )
 		action_and_print(rules, philo->index, "is sleeping", rules->time_to_sleep);
 		// if eat max times
 		// sleep if have eat
