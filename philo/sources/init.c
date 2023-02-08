@@ -57,6 +57,7 @@ int fill_rules(char **argv, int argc, t_rules *rules)
 	else
 		rules->max_meal = -1;
 	rules->nb_dead = 0;
+	rules->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * rules->nb_philo);
 	if (mutex_init(rules) != 1)
 		return (0);
 	rules->ate_enough = 0;

@@ -39,9 +39,8 @@ typedef struct s_rules {
 	int all_ate_enough;
 	long long	start_time_ms;
 	pthread_mutex_t	mutex_nb_dead;
-	pthread_mutex_t	mutex_ate_enough;
-	pthread_mutex_t	mutex_rfork;
-	pthread_mutex_t	mutex_lfork;
+	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	*mutex_tab_fork;
 }	t_rules;
 
 typedef struct s_philo {
@@ -64,9 +63,9 @@ int	init_philo(t_rules *rules, t_philo **philo);
 
 int	ft_atoi(const char *str);
 long long	get_time_ms(void);
-long long	time_diff_ms(long long last, long long now);
+long long	get_time_since_ms(long long start_time);
 void		usleep_better(int usec);
-
+int ft_strcmp(const char *str1, const char *str2);
 
 // THREADS.C
 int	create_threads(t_rules *rules, t_philo *philo);
@@ -77,6 +76,7 @@ void	destroy_mutex(t_rules *rules);
 
 // PHILO_ACTIONS.C
 void	check_dead(t_rules *rules, t_philo *philo);
-void    action_and_print(t_rules *rules, int nb_philo, char *action, int time);
+void    action_and_print(t_rules *rules, t_philo *philo, char *action);
+void	check_eat(t_rules *rules, t_philo *philo);
 
 #endif

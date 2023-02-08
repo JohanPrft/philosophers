@@ -27,6 +27,7 @@ int	main(int argc, char **argv)
 	if (!create_threads(&rules, philo))
 		return (1);
 	destroy_mutex(&rules);
+	free(rules.mutex_tab_fork);
 	free(philo);
 	return (0);
 }

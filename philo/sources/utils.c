@@ -43,17 +43,33 @@ long long	get_time_ms(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-long long	time_diff_ms(long long last, long long now)
+long long	get_time_since_ms(long long start_time)
 {
-	return (now - last);
+	return (get_time_ms() - start_time);
 }
 
 void	usleep_better(int usec)
 {
-	int	i;
+	long long timestamp;
 
-	usec /= 10;
-	i = -1;
-	while (++i <= 10)
-		usleep(usec);
+	timestamp = get_time_ms();
+	while (1)
+	{
+		if (get_time_ms() - timestamp >= usec)
+			break ;
+		usleep(50);
+	}
+}
+
+int ft_strcmp(const char *str1, const char *str2)
+{
+	while (*str1)
+	{
+		if (*str1 != *str2) {
+			break;
+		}
+		str1++;
+		str2++;
+	}
+	return *(const unsigned char*)str1 - *(const unsigned char*)str2;
 }
