@@ -20,15 +20,15 @@
 
 typedef struct timeval t_tval;
 
-typedef enum e_state {
-	INIT = -1,
-	DEAD = 0,
-	THINK = 1,
-	EAT = 2,
-	SLEEP = 3,
-} t_state;
+typedef enum e_action {
+	EAT,
+	FORK,
+	SLEEP,
+	THINK,
+	DIED,
+} t_action;
 
-typedef struct s_rules {
+typedef struct s_env {
 	int	nb_philo;
 	int	time_to_die;
 	int	time_to_eat;
@@ -41,13 +41,13 @@ typedef struct s_rules {
 	pthread_mutex_t	mutex_nb_dead;
 	pthread_mutex_t	mutex_eat;
 	pthread_mutex_t	*mutex_tab_fork;
-}	t_rules;
+	pthread_mutex_t	mutex_print;
+}	t_env;
 
 typedef struct s_philo {
 	int			index;
 	pthread_t	thread_id;
-	t_rules		*param;
-	t_state		state;
+	t_env		*env;
 	int 		right_fork_id;
 	int 		left_fork_id;
 	long long	last_meal;
@@ -56,27 +56,27 @@ typedef struct s_philo {
 
 // INIT.C
 int	write_error(void);
-int fill_rules(char **argv, int argc, t_rules *param);
-int	init_philo(t_rules *rules, t_philo **philo);
+int fill_env(char **argv, int argc, t_env *env);
+int	init_philo(t_env *env, t_philo **philo);
 
 // UTILS.C
 
 int	ft_atoi(const char *str);
 long long	get_time_ms(void);
 long long	get_time_since_ms(long long start_time);
-void		usleep_better(int usec);
+void usleep_better(int usec, t_env *rules);
 int ft_strcmp(const char *str1, const char *str2);
 
 // THREADS.C
-int	create_threads(t_rules *rules, t_philo *philo);
+int	create_threads(t_env *env, t_philo *philo);
 
 // MUTEX.C
-int		mutex_init(t_rules *rules);
-void	destroy_mutex(t_rules *rules);
+int		mutex_init(t_env *env);
+void	destroy_mutex(t_env *env);
 
 // PHILO_ACTIONS.C
-void	check_dead(t_rules *rules, t_philo *philo);
-void    action_and_print(t_rules *rules, t_philo *philo, char *action);
-void	check_eat(t_rules *rules, t_philo *philo);
+int	check_dead(t_env *env, t_philo *philo);
+void    print_action(t_env *env, t_philo *philo, t_action action);
+int	check_all_eat(t_env *env, t_philo *philo);
 
 #endif

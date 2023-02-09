@@ -15,12 +15,12 @@
 // philo pointer is needed for it to be an array
 int	main(int argc, char **argv)
 {
-	t_rules	rules;
+	t_env	rules;
 	t_philo	*philo;
 
 	if (argc < 5 || argc > 6)
 		return (write_error());
-	if (!fill_rules(argv, argc, &rules))
+	if (!fill_env(argv, argc, &rules))
 		return (write_error());
 	if (!init_philo(&rules, &philo))
 		return (1);

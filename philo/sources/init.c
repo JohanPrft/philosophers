@@ -19,7 +19,7 @@ int	write_error(void)
 	return (1);
 }
 
-int	check_only_int(char *str)
+int	check_only_int(const char *str)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ int	check_only_int(char *str)
 	return (1);
 }
 
-int fill_rules(char **argv, int argc, t_rules *rules)
+int fill_env(char **argv, int argc, t_env *env)
 {
 	int	i;
 
@@ -41,45 +41,44 @@ int fill_rules(char **argv, int argc, t_rules *rules)
 	while (++i < argc)
 		if (!check_only_int(argv[i]))
 			return (0);
-	rules->nb_philo = ft_atoi(argv[1]);
-	rules->time_to_die = ft_atoi(argv[2]);
-	rules->time_to_eat = ft_atoi(argv[3]);
-	rules->time_to_sleep = ft_atoi(argv[4]);
-	if (rules->nb_philo < 2 || rules->nb_philo > 200 ||rules->time_to_die < 0 \
-	|| rules->time_to_eat < 0 || rules->time_to_sleep < 0)
+	env->nb_philo = ft_atoi(argv[1]);
+	env->time_to_die = ft_atoi(argv[2]);
+	env->time_to_eat = ft_atoi(argv[3]);
+	env->time_to_sleep = ft_atoi(argv[4]);
+	if (env->nb_philo < 2 || env->nb_philo > 200 || env->time_to_die < 0 \
+ || env->time_to_eat < 0 || env->time_to_sleep < 0)
 		return (0);
 	if (argc == 6)
 	{
-		rules->max_meal = ft_atoi(argv[5]);
-		if (rules->max_meal < 0)
+		env->max_meal = ft_atoi(argv[5]);
+		if (env->max_meal < 0)
 			return (0);
 	}
 	else
-		rules->max_meal = -1;
-	rules->nb_dead = 0;
-	rules->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * rules->nb_philo);
-	if (mutex_init(rules) != 1)
+		env->max_meal = -1;
+	env->nb_dead = 0;
+	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
+	if (mutex_init(env) != 1)
 		return (0);
-	rules->ate_enough = 0;
-	rules->all_ate_enough = 0;
+	env->ate_enough = 0;
+	env->all_ate_enough = 0;
 	return (1);
 }
 
-int	init_philo(t_rules *rules, t_philo **philo)
+int	init_philo(t_env *env, t_philo **philo)
 {
 	int i;
 
-	*philo = malloc(sizeof(**philo) * rules->nb_philo);
+	*philo = malloc(sizeof(**philo) * env->nb_philo);
 	if (!*philo)
 		return (0);
 	i = -1;
-	while (++i < rules->nb_philo)
+	while (++i < env->nb_philo)
 	{
 		(*philo)[i].index = i;
-		(*philo)[i].param = rules;
-		(*philo)[i].state = INIT;
+		(*philo)[i].env = env;
 		(*philo)[i].right_fork_id = i;
-		(*philo)[i].left_fork_id = (i + 1) % rules->nb_philo;
+		(*philo)[i].left_fork_id = (i + 1) % env->nb_philo;
 		(*philo)[i].last_meal = -1;
 	}
 	return (1);

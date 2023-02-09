@@ -15,29 +15,27 @@
 void	*routine(void *void_philo)
 {
 	t_philo *philo;
-	t_rules	*rules;
+	t_env	*env;
 
 	philo = (t_philo *)void_philo;
-	rules = philo->param;
-    philo->last_meal = rules->start_time_ms;
+	env = philo->env;
+    philo->last_meal = env->start_time_ms;
 	if (philo->index % 2)
-		usleep_better(10);
-	while (rules->nb_dead == 0 && rules->all_ate_enough == 0)
+		usleep_better(10, env);
+	while (1)
 	{
-		check_dead(rules, philo);
-		action_and_print(rules, philo, "is sleeping");
-		usleep_better(rules->time_to_sleep);
-//		check_eat(rules, philo);
-//		action_and_print(rules, philo, "is thinking", rules->time_to_sleep);
-//		action_and_print(rules, philo, "is sleeping", rules->time_to_sleep);
+		print_action(env, philo, SLEEP);
+		usleep_better(env->time_to_sleep, env);
+//		check_eat(env, philo);
+//		print_action(env, philo, "is thinking", env->time_to_sleep);
+//		print_action(env, philo, "is sleeping", env->time_to_sleep);
 //		 if eat max times
 //		 think
 	}
-	printf("%lld %i died\n", get_time_ms() - rules->start_time_ms, philo->index);
 	return (NULL);
 }
 
-void exit_threads(t_rules *rules, t_philo *philo)
+void exit_threads(t_env *rules, t_philo *philo)
 {
 	int	i;
 
@@ -46,19 +44,21 @@ void exit_threads(t_rules *rules, t_philo *philo)
 		pthread_join(philo[i].thread_id, NULL);
 }
 
-int	create_threads(t_rules *rules, t_philo *philo)
+int	create_threads(t_env *env, t_philo *philo)
 {
 	int	i;
 
 	i = -1;
-	rules->start_time_ms = get_time_ms();
-	while (++i < rules->nb_philo)
+	env->start_time_ms = get_time_ms();
+	while (++i < env->nb_philo)
 	{
 		if (pthread_create(&(philo[i].thread_id), NULL, &routine, (void *)&(philo[i])))
 			return (0);
-
 	}
-	// death
-	exit_threads(rules, philo);
+	while (1)
+	{
+		if (check_dead(env, philo) == 1 || check_all_eat(env, philo) == 1) // check max eat too
+			break;
+	}
 	return (1);
 }
