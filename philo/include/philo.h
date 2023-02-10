@@ -64,7 +64,7 @@ int	init_philo(t_env *env, t_philo **philo);
 int	ft_atoi(const char *str);
 long long	get_time_ms(void);
 long long	get_time_since_ms(long long start_time);
-void usleep_better(int usec, t_env *rules);
+void usleep_better(int usec);
 int ft_strcmp(const char *str1, const char *str2);
 
 // THREADS.C
@@ -78,5 +78,6 @@ void	destroy_mutex(t_env *env);
 int	check_dead(t_env *env, t_philo *philo);
 void    print_action(t_env *env, t_philo *philo, t_action action);
 int	check_all_eat(t_env *env, t_philo *philo);
+void	philo_eat(t_env *env, t_philo *philo);
 
 #endif

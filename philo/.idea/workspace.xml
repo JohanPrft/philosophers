@@ -29,9 +29,6 @@
       <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/philo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/mutex.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/mutex.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/philo_actions.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/philo_actions.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/threads.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/threads.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/utils.c" afterDir="false" />
@@ -161,7 +158,8 @@
       <workItem from="1675844716125" duration="20041000" />
       <workItem from="1675931135901" duration="4203000" />
       <workItem from="1675946005586" duration="5527000" />
-      <workItem from="1675952417882" duration="6092000" />
+      <workItem from="1675952417882" duration="6884000" />
+      <workItem from="1676018610087" duration="6817000" />
     </task>
     <servers />
   </component>

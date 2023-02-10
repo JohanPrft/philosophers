@@ -21,18 +21,14 @@ void	*routine(void *void_philo)
 	env = philo->env;
     philo->last_meal = env->start_time_ms;
 	if (philo->index % 2)
-		usleep_better(10, env);
+		print_action(env, philo, THINK);
 	while (1)
 	{
+		philo_eat(env, philo);
 		print_action(env, philo, SLEEP);
-		usleep_better(env->time_to_sleep, env);
-//		check_eat(env, philo);
-//		print_action(env, philo, "is thinking", env->time_to_sleep);
-//		print_action(env, philo, "is sleeping", env->time_to_sleep);
-//		 if eat max times
-//		 think
+		usleep_better(env->time_to_sleep);
+		print_action(env, philo, THINK);
 	}
-	return (NULL);
 }
 
 void exit_threads(t_env *rules, t_philo *philo)
@@ -57,7 +53,7 @@ int	create_threads(t_env *env, t_philo *philo)
 	}
 	while (1)
 	{
-		if (check_dead(env, philo) == 1 || check_all_eat(env, philo) == 1) // check max eat too
+		if (check_dead(env, philo) == 1 || check_all_eat(env, philo) == 1)
 			break;
 	}
 	return (1);

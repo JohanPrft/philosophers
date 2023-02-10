@@ -12,6 +12,22 @@
 
 #include "../include/philo.h"
 
+void	philo_eat(t_env *env, t_philo *philo)
+{
+	pthread_mutex_lock(&env->mutex_tab_fork[philo->right_fork_id]);
+	print_action(env, philo, FORK);
+	pthread_mutex_lock(&env->mutex_tab_fork[philo->left_fork_id]);
+	print_action(env, philo, FORK);
+	print_action(env, philo, EAT);
+	// mutex on
+	philo->last_meal = get_time_ms();
+	// mutex on
+	philo->nb_meal++;
+	usleep_better(env->time_to_eat);
+	pthread_mutex_unlock(&env->mutex_tab_fork[philo->right_fork_id]);
+	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id]);
+}
+
 int	check_dead(t_env *env, t_philo *philo)
 {
 	int	i;

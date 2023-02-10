@@ -48,16 +48,14 @@ long long	get_time_since_ms(long long start_time)
 	return (get_time_ms() - start_time);
 }
 
-void usleep_better(int usec, t_env *rules)
+void usleep_better(int usec)
 {
 	long long timestamp;
 
 	timestamp = get_time_ms();
-	while (rules->nb_dead == 0)
-	{
+	while (1)
 		if (get_time_ms() - timestamp >= usec)
 			break ;
-	}
 }
 
 int ft_strcmp(const char *str1, const char *str2)
