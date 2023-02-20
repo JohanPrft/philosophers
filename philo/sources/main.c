@@ -12,7 +12,7 @@
 
 #include "../include/philo.h"
 
-// philo pointer is needed for it to be an array
+// philo pointer is needed to be an array
 int	main(int argc, char **argv)
 {
 	t_env	rules;
