@@ -75,7 +75,7 @@ int	init_philo(t_env *env, t_philo **philo)
 	i = -1;
 	while (++i < env->nb_philo)
 	{
-		(*philo)[i].index = i;
+		(*philo)[i].index = i + 1;
 		(*philo)[i].env = env;
 		(*philo)[i].right_fork_id = i;
 		(*philo)[i].left_fork_id = (i + 1) % env->nb_philo;

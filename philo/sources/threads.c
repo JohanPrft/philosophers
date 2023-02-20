@@ -19,9 +19,12 @@ void	*routine(void *void_philo)
 
 	philo = (t_philo *)void_philo;
 	env = philo->env;
-    philo->last_meal = env->start_time_ms;
+	philo->last_meal = env->start_time_ms;
 	if (philo->index % 2)
+	{
 		print_action(env, philo, THINK);
+		usleep_better(100);
+	}
 	while (1)
 	{
 		philo_eat(env, philo);
