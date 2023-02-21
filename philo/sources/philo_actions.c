@@ -19,9 +19,9 @@ void	philo_eat(t_env *env, t_philo *philo)
 	pthread_mutex_lock(&env->mutex_tab_fork[philo->left_fork_id]);
 	print_action(env, philo, FORK);
 	print_action(env, philo, EAT);
-	// mutex on
+	pthread_mutex_lock(&env->mutex_meal);
 	philo->last_meal = get_time_ms();
-	// mutex on
+	pthread_mutex_unlock(&env->mutex_meal);
 	philo->nb_meal++;
 	usleep_better(env->time_to_eat);
 	pthread_mutex_unlock(&env->mutex_tab_fork[philo->right_fork_id]);
@@ -35,14 +35,13 @@ int	check_dead(t_env *env, t_philo *philo)
 	i = -1;
 	while (++i < env->nb_philo)
 	{
-		// need mutex on the time of the last meal
+		pthread_mutex_lock(&env->mutex_meal);
 		if (get_time_ms() - philo[i].last_meal >= env->time_to_die)
 		{
 			print_action(env, &philo[i], DIED);
 			return (1);
 		}
-		else
-			return (0);
+		pthread_mutex_unlock(&env->mutex_meal);
 	}
 	return (0);
 }
@@ -58,9 +57,11 @@ int	check_all_eat(t_env *env, t_philo *philo)
 	nb_eat_enough = 0;
 	while (++i < env->nb_philo)
 	{
-		// need mutex on the nb of meal
+		pthread_mutex_lock(&env->mutex_meal);
 		if (philo[i].nb_meal >= env->max_meal)
 			nb_eat_enough++;
+		pthread_mutex_unlock(&env->mutex_meal);
+
 	}
 	if (nb_eat_enough == env->nb_philo)
 		return (1);

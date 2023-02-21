@@ -38,8 +38,7 @@ typedef struct s_env {
 	int ate_enough;
 	int all_ate_enough;
 	long long	start_time_ms;
-	pthread_mutex_t	mutex_nb_dead;
-	pthread_mutex_t	mutex_eat;
+	pthread_mutex_t	mutex_meal;
 	pthread_mutex_t	*mutex_tab_fork;
 	pthread_mutex_t	mutex_print;
 }	t_env;
@@ -65,7 +64,6 @@ int	ft_atoi(const char *str);
 long long	get_time_ms(void);
 long long	get_time_since_ms(long long start_time);
 void usleep_better(int usec);
-int ft_strcmp(const char *str1, const char *str2);
 
 // THREADS.C
 int	create_threads(t_env *env, t_philo *philo);

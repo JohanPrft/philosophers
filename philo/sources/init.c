@@ -45,7 +45,7 @@ int fill_env(char **argv, int argc, t_env *env)
 	env->time_to_die = ft_atoi(argv[2]);
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
-	if (env->nb_philo < 2 || env->nb_philo > 200 || env->time_to_die < 0 \
+	if (env->nb_philo < 1 || env->nb_philo > 200 || env->time_to_die < 0 \
  || env->time_to_eat < 0 || env->time_to_sleep < 0)
 		return (0);
 	if (argc == 6)

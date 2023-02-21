@@ -37,7 +37,7 @@ OBJS			=	${SRCS_LIST:%.c=${DIR_OBJS}%.o}
 
 # ---- Compilation ---- #
 
-CFLAGS			=	-Wall -Wextra -g -pthread  ######### -fsanitize=thread ADD -Werror !!!!!!!! #########
+CFLAGS			=	-Wall -Wextra -g -pthread -fsanitize=thread #########  ADD -Werror !!!!!!!! #########
 
 # ---- Commands ---- #
 

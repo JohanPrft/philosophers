@@ -19,7 +19,9 @@ void	*routine(void *void_philo)
 
 	philo = (t_philo *)void_philo;
 	env = philo->env;
+	pthread_mutex_lock(&env->mutex_meal);
 	philo->last_meal = env->start_time_ms;
+	pthread_mutex_unlock(&env->mutex_meal);
 	if (philo->index % 2)
 	{
 		print_action(env, philo, THINK);

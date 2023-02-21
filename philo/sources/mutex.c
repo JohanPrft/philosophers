@@ -21,25 +21,24 @@ void destoy_mutex_tab(pthread_mutex_t *mutex_tab_fork, int max)
 		pthread_mutex_destroy(&mutex_tab_fork[i]);
 }
 
+// moyen + propre de faire ?
 int	mutex_init(t_env *env)
 {
 	int i;
-	if (pthread_mutex_init(&env->mutex_nb_dead, NULL) != 0)
+
+	if (pthread_mutex_init(&env->mutex_meal, NULL) != 0)
 		return (0);
-	if (pthread_mutex_init(&env->mutex_eat, NULL) != 0)
+	if (pthread_mutex_init(&env->mutex_print, NULL) != 0)
 	{
-		pthread_mutex_destroy(&env->mutex_nb_dead);
+		pthread_mutex_destroy(&env->mutex_meal);
 		return (0);
 	}
-	pthread_mutex_init(&env->mutex_print, NULL);
 	i = -1;
 	while (++i < env->nb_philo)
 	{
 		pthread_mutex_t *mutex_tab_fork = env->mutex_tab_fork;
 		if (pthread_mutex_init(&mutex_tab_fork[i], NULL) != 0)
 		{
-			pthread_mutex_destroy(&env->mutex_nb_dead);
-			pthread_mutex_destroy(&env->mutex_eat);
 			destoy_mutex_tab(mutex_tab_fork, i);
 			return (0);
 		}
@@ -49,8 +48,7 @@ int	mutex_init(t_env *env)
 
 void	destroy_mutex(t_env *env)
 {
-	pthread_mutex_destroy(&env->mutex_nb_dead);
-	pthread_mutex_destroy(&env->mutex_eat);
+	pthread_mutex_destroy(&env->mutex_meal);
 	pthread_mutex_destroy(&env->mutex_print);
 	destoy_mutex_tab(env->mutex_tab_fork, env->nb_philo);
 }
