@@ -56,33 +56,41 @@ int fill_env(char **argv, int argc, t_env *env)
 	}
 	else
 		env->max_meal = -1;
-	env->nb_dead = 0;
-	env->ate_enough = 0;
-	env->all_ate_enough = 0;
 	return (1);
 }
 
+/*
+ * init_philo:
+ * create and allocate an array of philosopher with all infos
+ * due to subject first philo has an index (philo.index) of 1
+ */
 int	init_philo(t_env *env, t_philo **philo)
 {
 	int i;
+	int subject_i;
 
 	*philo = malloc(sizeof(**philo) * env->nb_philo);
 	if (!*philo)
 		return (0);
-	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
+	i = -1;
+	while (++i < env->nb_philo)
+	{
+		subject_i = i + 1;
+		(*philo)[i].index = subject_i;
+		(*philo)[i].env = env;
+		(*philo)[i].right_fork_id = subject_i;
+		(*philo)[i].left_fork_id = (subject_i + 1) % env->nb_philo;
+		(*philo)[i].last_meal = -1;
+		//printf ("philo %i : right_fork_id %i, left_fork_id %i\n", (*philo)[i].index, (*philo)[i].right_fork_id, (*philo)[i].left_fork_id);
+	}
+	return (1);
+}
+
+/*
+ * 	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
 	if (mutex_init(env) != 1)
 	{
 		free(philo);
 		return (0);
 	}
-	i = -1;
-	while (++i < env->nb_philo)
-	{
-		(*philo)[i].index = i + 1;
-		(*philo)[i].env = env;
-		(*philo)[i].right_fork_id = i;
-		(*philo)[i].left_fork_id = (i + 1) % env->nb_philo;
-		(*philo)[i].last_meal = -1;
-	}
-	return (1);
-}
+ */

@@ -22,8 +22,8 @@ void	philo_eat(t_env *env, t_philo *philo)
 	pthread_mutex_lock(&env->mutex_meal);
 	philo->last_meal = get_time_ms();
 	pthread_mutex_unlock(&env->mutex_meal);
-	philo->nb_meal++;
 	usleep_better(env->time_to_eat);
+	philo->nb_meal++;
 	pthread_mutex_unlock(&env->mutex_tab_fork[philo->right_fork_id]);
 	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id]);
 }
@@ -36,6 +36,7 @@ int	check_dead(t_env *env, t_philo *philo)
 	while (++i < env->nb_philo)
 	{
 		pthread_mutex_lock(&env->mutex_meal);
+		//printf("philo %i : %lli - %lli >= %i\n", i, get_time_ms(), philo[i].last_meal, env->time_to_die);
 		if (get_time_ms() - philo[i].last_meal >= env->time_to_die)
 		{
 			print_action(env, &philo[i], DIED);

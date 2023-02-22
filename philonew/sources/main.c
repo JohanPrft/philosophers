@@ -24,10 +24,8 @@ int	main(int argc, char **argv)
 		return (write_error());
 	if (!init_philo(&rules, &philo))
 		return (1);
-	if (create_threads(&rules, philo))
-		return (1);
-	free(rules.mutex_tab_fork);
+//	if (create_threads(&rules, philo))
+//		return (1);
 	free(philo);
-	destroy_mutex(&rules);
 	return (0);
 }
