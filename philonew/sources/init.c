@@ -12,50 +12,16 @@
 
 #include "../include/philo.h"
 
-int	write_error(void)
+int	write_error(char *str, t_env *env)
 {
-	printf("Please start the program with the correct syntax : \n./philo\
- <nb_philo> <time_to_die> <time_to_eat> <time_to_sleep> (<max_nb_eat>)\n");
-	return (1);
+	free (env->philo);
+	fprintf(stderr, "%s\n", str);
+	return (0);
 }
 
-int	check_only_int(const char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] > '9' || str[i] < '0')
-			return (0);
-		i++;
-	}
-	return (1);
-}
-
-int fill_env(char **argv, int argc, t_env *env)
-{
-	int	i;
-
-	i = 0;
-	while (++i < argc)
-		if (!check_only_int(argv[i]))
-			return (0);
-	env->nb_philo = ft_atoi(argv[1]);
-	env->time_to_die = ft_atoi(argv[2]);
-	env->time_to_eat = ft_atoi(argv[3]);
-	env->time_to_sleep = ft_atoi(argv[4]);
-	if (env->nb_philo < 1 || env->nb_philo > 200 || env->time_to_die < 0 \
- || env->time_to_eat < 0 || env->time_to_sleep < 0)
+int mutex_init(t_env *env) {
+	if (pthread_mutex_init(&env->mutex_print, 0))
 		return (0);
-	if (argc == 6)
-	{
-		env->max_meal = ft_atoi(argv[5]);
-		if (env->max_meal < 0)
-			return (0);
-	}
-	else
-		env->max_meal = -1;
 	return (1);
 }
 
@@ -83,6 +49,7 @@ int	init_philo(t_env *env, t_philo **philo)
 		(*philo)[i].last_meal = -1;
 		//printf ("philo %i : right_fork_id %i, left_fork_id %i\n", (*philo)[i].index, (*philo)[i].right_fork_id, (*philo)[i].left_fork_id);
 	}
+	env->philo = *philo;
 	return (1);
 }
 
