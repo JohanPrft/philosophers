@@ -48,25 +48,22 @@ long long	get_time_since_ms(long long start_time)
 	return (get_time_ms() - start_time);
 }
 
-void usleep_better(int usec)
+void usleep_better(time_t usec)
 {
 	long long timestamp;
 
-	timestamp = get_time_ms();
-	while (1)
-		if (get_time_ms() - timestamp >= usec)
-			break ;
+	timestamp = get_time_ms() + usec;
+	while (get_time_ms() < timestamp)
+		usleep(100);
 }
 
-int ft_strcmp(const char *str1, const char *str2)
+void	clean(t_env *env)
 {
-	while (*str1)
-	{
-		if (*str1 != *str2) {
-			break;
-		}
-		str1++;
-		str2++;
-	}
-	return *(const unsigned char*)str1 - *(const unsigned char*)str2;
+//	int i;
+//	pthread_mutex_destroy(&env->mutex_print);
+//	while (i < env->nb_philo)
+//		if (pthread_mutex_destroy(&env->mutex_tab_fork[i]))
+//			return (write_error())
+	free (env->mutex_tab_fork);
+	free (env->philo);
 }

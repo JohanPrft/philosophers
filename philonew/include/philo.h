@@ -6,7 +6,7 @@
 /*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/30 09:35:00 by jprofit           #+#    #+#             */
-/*   Updated: 2023/01/30 18:57:42 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/02/24 13:50:48 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@
 # include <stdbool.h>
 # include <sys/time.h>
 
-# define ERR 1
+# define ERROR 1
+# define SUCCESS 0
 # define STDERR 2
 # define STR_ERR_SYNTAX "Wrong syntax : please start the program as follow : ./philo <nb_philo> <time_to_die> <time_to_eat> <time_to_sleep> (<max_nb_eat>)"
 # define STR_ERR_MALLOC "Memory allocation failed"
@@ -40,13 +41,15 @@ typedef enum e_action {
 
 struct s_env {
 	int	nb_philo;
-	int	time_to_die;
-	int	time_to_eat;
-	int	time_to_sleep;
+	time_t	time_to_die;
+	time_t	time_to_eat;
+	time_t	time_to_sleep;
 	int max_meal;
-	int one_dead;
-	long long	start_time_ms;
+	int stop_simulation;
+	time_t	start_time_ms;
 	pthread_mutex_t mutex_print;
+	pthread_mutex_t *mutex_tab_fork;
+	pthread_mutex_t mutex_stop_simu;
 	t_philo *philo;
 };
 
@@ -55,7 +58,8 @@ struct s_philo {
 	int			index;
 	int 		right_fork_id;
 	int 		left_fork_id;
-	long long	last_meal;
+	pthread_mutex_t mutex_meal;
+	time_t	last_meal;
 	int 		nb_meal;
 	pthread_t	thread_id;
 };
@@ -63,8 +67,8 @@ struct s_philo {
 // UTILS
 int	ft_atoi(const char *str);
 long long	get_time_ms(void);
-void usleep_better(int usec);
-int ft_strcmp(const char *str1, const char *str2);
+void usleep_better(time_t usec);
+void	clean(t_env *env);
 
 // PARSING
 int parsing(char **argv, int argc, t_env *env);
@@ -77,5 +81,8 @@ int	init_philo(t_env *env, t_philo **philo);
 void	start_synchro(long long start_time);
 void	*routine(void *philo_void);
 
+// PHILO_ACTION
+void	philo_eat(t_env *env, t_philo *philo);
+void    print_action(t_env *env, t_philo *philo, t_action action);
 
 #endif

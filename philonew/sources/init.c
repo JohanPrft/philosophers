@@ -14,15 +14,25 @@
 
 int	write_error(char *str, t_env *env)
 {
-	free (env->philo);
+	clean(env);
 	fprintf(stderr, "%s\n", str);
-	return (0);
+	return (ERROR);
 }
 
-int mutex_init(t_env *env) {
+int mutex_init(t_env *env)
+{
+	int i;
+
+	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
+	i = -1;
+	while (++i < env->nb_philo)
+		if (pthread_mutex_init(&env->mutex_tab_fork[i], 0))
+			return (ERROR);
+	if (pthread_mutex_init(&env->mutex_stop_simu, 0))
+		return (ERROR);
 	if (pthread_mutex_init(&env->mutex_print, 0))
-		return (0);
-	return (1);
+		return (ERROR);
+	return (SUCCESS);
 }
 
 /*
@@ -37,7 +47,7 @@ int	init_philo(t_env *env, t_philo **philo)
 
 	*philo = malloc(sizeof(**philo) * env->nb_philo);
 	if (!*philo)
-		return (0);
+		return (write_error(STR_ERR_MALLOC, env));
 	i = -1;
 	while (++i < env->nb_philo)
 	{
@@ -47,10 +57,13 @@ int	init_philo(t_env *env, t_philo **philo)
 		(*philo)[i].right_fork_id = subject_i;
 		(*philo)[i].left_fork_id = (subject_i + 1) % env->nb_philo;
 		(*philo)[i].last_meal = -1;
-		//printf ("philo %i : right_fork_id %i, left_fork_id %i\n", (*philo)[i].index, (*philo)[i].right_fork_id, (*philo)[i].left_fork_id);
+		if (pthread_mutex_init(&(*philo)[i].mutex_meal, 0))
+			return (write_error(STR_ERR_MUTEX, env));
 	}
 	env->philo = *philo;
-	return (1);
+	if (mutex_init(env))
+		return (write_error(STR_ERR_MUTEX, env));
+	return (SUCCESS);
 }
 
 /*

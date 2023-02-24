@@ -28,8 +28,8 @@ DIR_HEADERS		=	include/
 
 HEADERS_LIST	=	philo.h
 
-SRCS_LIST		=	main.c		init.c		utils.c		threads.c	parsing.c	#mutex.c	\
-					philo_actions.c
+SRCS_LIST		=	main.c		init.c		utils.c		threads.c	parsing.c	philo_action.c	\
+					#mutex.c
 
 HEADERS			=	${HEADERS_LIST:%.h=${DIR_HEADERS}%.h}
 
@@ -37,7 +37,7 @@ OBJS			=	${SRCS_LIST:%.c=${DIR_OBJS}%.o}
 
 # ---- Compilation ---- #
 
-CFLAGS			=	-Wall -Wextra -g -pthread ######### -fsanitize=thread ADD -Werror !!!!!!!! #########
+CFLAGS			=	-Wall -Wextra -g -pthread -fsanitize=thread#########  ADD -Werror !!!!!!!! #########
 
 # ---- Commands ---- #
 
