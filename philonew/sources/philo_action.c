@@ -14,9 +14,11 @@
 
 void	philo_eat(t_env *env, t_philo *philo)
 {
-	pthread_mutex_lock(&env->mutex_tab_fork[philo->right_fork_id]);
+	printf("philo %i wait for lock right %i\n", philo->index, philo->right_fork_id);
+	pthread_mutex_lock(&env->mutex_tab_fork[philo->right_fork_id - 1]);
 	print_action(env, philo, FORK);
-	pthread_mutex_lock(&env->mutex_tab_fork[philo->left_fork_id]);
+	printf("philo %i wait for lock left %i\n", philo->index, philo->left_fork_id);
+	pthread_mutex_lock(&env->mutex_tab_fork[philo->left_fork_id - 1]);
 	print_action(env, philo, FORK);
 	print_action(env, philo, EAT);
 	pthread_mutex_lock(&philo->mutex_meal);
@@ -24,8 +26,8 @@ void	philo_eat(t_env *env, t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex_meal);
 	usleep_better(env->time_to_eat);
 	philo->nb_meal++;
-	pthread_mutex_unlock(&env->mutex_tab_fork[philo->right_fork_id]);
-	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id]);
+	pthread_mutex_unlock(&env->mutex_tab_fork[philo->right_fork_id - 1]);
+	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id - 1]);
 }
 
 void    print_action(t_env *env, t_philo *philo, t_action action)
