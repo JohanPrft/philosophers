@@ -36,6 +36,26 @@ int mutex_init(t_env *env)
 }
 
 /*
+ * assigning forks for each philo is different half the time
+ * otherwise it can lead to deadlock :
+ * a philo lock a mutex for the first fork, then wait for the second one
+ * who had been taken by a second philo waiting for the first one
+ */
+void	assign_forks(t_env *env, t_philo *philo, int i_philo)
+{
+	if (i_philo % 2 == 1)
+	{
+		philo->right_fork_id = i_philo;
+		philo->left_fork_id = (i_philo % env->nb_philo) + 1;
+	}
+	else
+	{
+		philo->right_fork_id = (i_philo % env->nb_philo) + 1;
+		philo->left_fork_id = i_philo;
+	}
+}
+
+/*
  * init_philo:
  * create and allocate an array of philosopher with all infos
  * due to subject first philo has an index (philo.index) of 1
@@ -54,11 +74,11 @@ int	init_philo(t_env *env, t_philo **philo)
 		subject_i = i + 1;
 		(*philo)[i].index = subject_i;
 		(*philo)[i].env = env;
-		(*philo)[i].right_fork_id = subject_i;
-		(*philo)[i].left_fork_id = (subject_i + 1) % env->nb_philo;
+		assign_forks(env, &(*philo)[i], subject_i);
 		(*philo)[i].last_meal = -1;
 		if (pthread_mutex_init(&(*philo)[i].mutex_meal, 0))
 			return (write_error(STR_ERR_MUTEX, env));
+		printf("philo n%i, %i, %i\n", (*philo)[i].index, (*philo)[i].left_fork_id, (*philo)[i].right_fork_id);
 	}
 	env->philo = *philo;
 	if (mutex_init(env))

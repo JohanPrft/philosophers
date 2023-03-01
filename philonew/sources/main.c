@@ -20,7 +20,7 @@ int	start_simulation(t_env *env, t_philo *philo)
 	i = -1;
 	while (++i < env->nb_philo)
 	{
-		if (pthread_create(&philo[i].thread_id, NULL, &routine, &(philo[i])))
+		if (pthread_create(&philo[i].thread_id, NULL, &philosopher, &(philo[i])))
 			return (ERROR);
 	}
 	return (SUCCESS);

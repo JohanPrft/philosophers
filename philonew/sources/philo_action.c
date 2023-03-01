@@ -14,10 +14,8 @@
 
 void	philo_eat(t_env *env, t_philo *philo)
 {
-	printf("philo %i wait for lock right %i\n", philo->index, philo->right_fork_id);
 	pthread_mutex_lock(&env->mutex_tab_fork[philo->right_fork_id - 1]);
 	print_action(env, philo, FORK);
-	printf("philo %i wait for lock left %i\n", philo->index, philo->left_fork_id);
 	pthread_mutex_lock(&env->mutex_tab_fork[philo->left_fork_id - 1]);
 	print_action(env, philo, FORK);
 	print_action(env, philo, EAT);

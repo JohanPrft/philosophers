@@ -21,22 +21,7 @@ void	start_synchro(long long start_time)
 		continue ;
 }
 
-/*
- * protect the stop_simulation variable
- * copying the stop_simulation var is necessary in order to protect it
- * return a bool
- */
-int	stop_simulation(t_env *env)
-{
-	int temp;
-
-	pthread_mutex_lock(&env->mutex_stop_simu);
-	temp = env->stop_simulation;
-	pthread_mutex_unlock(&env->mutex_stop_simu);
-	return (temp);
-}
-
-void	*routine(void *philo_void)
+void	*philosopher(void *philo_void)
 {
 	t_philo	*philo;
 	t_env	*env;
@@ -57,7 +42,6 @@ void	*routine(void *philo_void)
 	print_action(env, philo, SLEEP);
 	usleep_better(env->time_to_sleep);
 	print_action(env, philo, THINK);
-
 //	}
 	return (NULL);
 }

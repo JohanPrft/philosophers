@@ -77,12 +77,16 @@ int parsing(char **argv, int argc, t_env *env);
 int	write_error(char *str, t_env *env);
 int	init_philo(t_env *env, t_philo **philo);
 
-// THREADS
+// PHILOSOPHERS
 void	start_synchro(long long start_time);
-void	*routine(void *philo_void);
+void	*philosopher(void *philo_void);
 
 // PHILO_ACTION
 void	philo_eat(t_env *env, t_philo *philo);
 void    print_action(t_env *env, t_philo *philo, t_action action);
+
+// HITMAN
+int	stop_simulation(t_env *env , bool flag);
+
 
 #endif
