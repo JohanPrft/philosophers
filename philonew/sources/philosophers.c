@@ -35,13 +35,12 @@ void	*philosopher(void *philo_void)
 		print_action(env, philo, THINK);
 		usleep_better(100);
 	}
-//	while (!stop_simulation(env))
-//	{
+	while (!stop_simulation(env, false))
+	{
 	philo_eat(env, philo);
-	usleep_better(env->time_to_eat);
 	print_action(env, philo, SLEEP);
 	usleep_better(env->time_to_sleep);
 	print_action(env, philo, THINK);
-//	}
+	}
 	return (NULL);
 }

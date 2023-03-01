@@ -66,7 +66,7 @@ struct s_philo {
 
 // UTILS
 int	ft_atoi(const char *str);
-long long	get_time_ms(void);
+time_t	get_time_ms(void);
 void usleep_better(time_t usec);
 void	clean(t_env *env);
 
@@ -87,6 +87,7 @@ void    print_action(t_env *env, t_philo *philo, t_action action);
 
 // HITMAN
 int	stop_simulation(t_env *env , bool flag);
+void	hitman(t_env *env);
 
 
 #endif

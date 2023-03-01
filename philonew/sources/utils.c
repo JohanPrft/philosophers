@@ -35,7 +35,7 @@ int	ft_atoi(const char *str)
 	return (sign * res);
 }
 
-long long	get_time_ms(void)
+time_t	get_time_ms(void)
 {
 	t_tval	time;
 

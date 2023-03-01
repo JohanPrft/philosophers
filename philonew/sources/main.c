@@ -23,6 +23,8 @@ int	start_simulation(t_env *env, t_philo *philo)
 		if (pthread_create(&philo[i].thread_id, NULL, &philosopher, &(philo[i])))
 			return (ERROR);
 	}
+	printf("finished creating threads \n");
+	hitman(env);
 	return (SUCCESS);
 }
 int	end_simulation(t_env *env, t_philo *philo)
