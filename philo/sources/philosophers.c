@@ -3,40 +3,58 @@
 /*                                                        :::      ::::::::   */
 /*   threads.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: jprofit <jprofit@student.42.fr>            +#+  +:+       +#+        */
+/*   By: jprofit <jprofit@student.42lyon.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/30 16:01:19 by jprofit           #+#    #+#             */
-/*   Updated: 2023/02/22 10:35:22 by jprofit          ###   ########.fr       */
+/*   Created: 2023/02/22 18:02:45 by jprofit           #+#    #+#             */
+/*   Updated: 2023/02/22 18:02:45 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/philo.h"
 
-void	sleep_until_go(long long start_time_ms)
+/*
+ * keep the program until start_time is reached
+ */
+void	start_synchro(long long start_time)
 {
-	while(start_time_ms > get_time_ms())
-		continue;
+	while (get_time_ms() < start_time)
+		continue ;
 }
 
-void	*routine(void *void_philo)
+void	alone_philo(t_env *env, t_philo *philo)
+{
+	print_action(env, philo, THINK);
+	while (!stop_simulation(env, false))
+		usleep_better(100);
+}
+
+void	set_last_meal (t_env *env, t_philo *philo)
+{
+	pthread_mutex_lock(&philo->mutex_meal);
+	philo->last_meal = env->start_time_ms;
+	pthread_mutex_unlock(&philo->mutex_meal);
+}
+
+void	*philosopher(void *philo_void)
 {
 	t_philo	*philo;
 	t_env	*env;
 
-	philo = (t_philo *)void_philo;
+	philo = philo_void;
 	env = philo->env;
-	if (env->max_meal == 0)
+	set_last_meal(env, philo);
+	start_synchro(env->start_time_ms);
+	if (env->nb_philo == 1)
+	{
+		alone_philo(env, philo);
 		return (NULL);
-	pthread_mutex_lock(&philo->mutex_meal);
-	philo->last_meal = env->start_time_ms;
-	pthread_mutex_unlock(&philo->mutex_meal);
-	sleep_until_go(env->start_time_ms);
+	}
 	if (philo->index % 2)
 	{
 		print_action(env, philo, THINK);
 		usleep_better(100);
 	}
-	while (has_simulation_stopped(philo->table) == false)
+	while (!stop_simulation(env, false))
 	{
 		philo_eat(env, philo);
 		print_action(env, philo, SLEEP);
@@ -44,19 +62,4 @@ void	*routine(void *void_philo)
 		print_action(env, philo, THINK);
 	}
 	return (NULL);
-}
-
-int	create_threads(t_env *env, t_philo *philo)
-{
-	int i;
-
-	env->start_time_ms = get_time_ms() + (env->nb_philo * 2 * 10);
-	i = -1;
-	while (++i < env->nb_philo)
-	{
-		if (pthread_create(&(philo[i].thread_id), NULL, &routine, (void *)&(philo[i])))
-			return (false);
-	}
-	usleep_better(1000);
-	return (1);
 }

@@ -22,16 +22,33 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="954fb1d1-c52a-4c55-a262-cd09da6d334e" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/../.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="c02eb1f8-a5cf-4c86-851d-6a2a481e31a6" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/Makefile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/include/philo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/init.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/parsing.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/parsing.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/threads.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/threads.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/philo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/old_thread" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo" beforeDir="false" afterPath="$PROJECT_DIR$/philo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/philo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/mutex.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/philo_actions.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/threads.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/utils.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/.nfs00000000046902e700000279" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/Makefile" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/include/philo.h" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/hitman.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/init.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/main.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/parsing.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/philo_action.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/philosophers.c" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/utils.c" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/../philopapo" beforeDir="false" afterPath="$PROJECT_DIR$/../philopapo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../philoparis" beforeDir="false" afterPath="$PROJECT_DIR$/../philoparis" afterDir="false" />
     </list>
@@ -72,11 +89,6 @@
         </entry>
       </map>
     </option>
-    <option name="projectSyncType">
-      <map>
-        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
-      </map>
-    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,32 +98,31 @@
     <option name="majorVersion" value="2022" />
     <option name="minorVersion" value="3.2" />
   </component>
-  <component name="ProjectId" id="2LPQoigXHzJ7mhd0YbbVT4mGb6Z" />
+  <component name="ProjectId" id="2M6Ibx6IbC2M99TOhNPSOsKBx9m" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
-    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.cidr.known.project.marker": "true",
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/nfs/homes/jprofit/Documents/philo/philo",
+    "last_opened_file_path": "/nfs/homes/jprofit/Documents/philo/philopapo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "structure.view.defaults.are.configured": "true",
+    "settings.editor.selected.configurable": "terminal",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RunManager" selected="Makefile Application.all">
-    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="10 100 10 10" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="philo" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/philo">
+    <configuration name="all" type="CLionNativeAppRunConfigurationType" PROGRAM_PARAMS="4 800 200 200" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true" PROJECT_NAME="philo" TARGET_NAME="all" CONFIG_NAME="all" version="1" RUN_PATH="$PROJECT_DIR$/philo">
       <method v="2">
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
@@ -158,24 +169,36 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="954fb1d1-c52a-4c55-a262-cd09da6d334e" name="Changes" comment="" />
-      <created>1675770416418</created>
+      <changelist id="c02eb1f8-a5cf-4c86-851d-6a2a481e31a6" name="Changes" comment="" />
+      <created>1677081680303</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1675770416418</updated>
-      <workItem from="1675770418464" duration="6436000" />
-      <workItem from="1675844716125" duration="20041000" />
-      <workItem from="1675931135901" duration="4203000" />
-      <workItem from="1675946005586" duration="5527000" />
-      <workItem from="1675952417882" duration="6884000" />
-      <workItem from="1676018610087" duration="7174000" />
-      <workItem from="1676887402001" duration="10447000" />
-      <workItem from="1677076275467" duration="3935000" />
-      <workItem from="1677235579308" duration="2313000" />
+      <updated>1677081680303</updated>
+      <workItem from="1677081681397" duration="3466000" />
+      <workItem from="1677234361559" duration="11320000" />
+      <workItem from="1677250753496" duration="194000" />
+      <workItem from="1677252566649" duration="3696000" />
+      <workItem from="1677664785440" duration="6871000" />
+      <workItem from="1677674750762" duration="10223000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
+          <url>file://$PROJECT_DIR$/sources/hitman.c</url>
+          <line>74</line>
+          <option name="timeStamp" value="5" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>
