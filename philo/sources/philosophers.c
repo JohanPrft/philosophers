@@ -13,7 +13,7 @@
 #include "../include/philo.h"
 
 /*
- * keep the program until start_time is reached
+ * wait until start_time is reached
  */
 void	start_synchro(long long start_time)
 {
@@ -21,11 +21,12 @@ void	start_synchro(long long start_time)
 		continue ;
 }
 
-void	alone_philo(t_env *env, t_philo *philo)
+void	*alone_philo(t_env *env, t_philo *philo)
 {
-	print_action(env, philo, THINK);
+	print_action(env, philo, THINK, false);
 	while (!stop_simulation(env, false))
 		usleep_better(100);
+	return (NULL);
 }
 
 void	set_last_meal (t_env *env, t_philo *philo)
@@ -45,21 +46,18 @@ void	*philosopher(void *philo_void)
 	set_last_meal(env, philo);
 	start_synchro(env->start_time_ms);
 	if (env->nb_philo == 1)
-	{
-		alone_philo(env, philo);
-		return (NULL);
-	}
+		return (alone_philo(env, philo));
 	if (philo->index % 2)
 	{
-		print_action(env, philo, THINK);
+		print_action(env, philo, THINK, 0);
 		usleep_better(100);
 	}
 	while (!stop_simulation(env, false))
 	{
 		philo_eat(env, philo);
-		print_action(env, philo, SLEEP);
+		print_action(env, philo, SLEEP, false);
 		usleep_better(env->time_to_sleep);
-		print_action(env, philo, THINK);
+		print_action(env, philo, THINK, false);
 	}
 	return (NULL);
 }

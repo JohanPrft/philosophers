@@ -61,6 +61,7 @@ struct s_philo {
 	pthread_mutex_t mutex_meal;
 	time_t	last_meal;
 	int 		nb_meal;
+	bool	ate_enough;
 	pthread_t	thread_id;
 };
 
@@ -83,11 +84,11 @@ void	*philosopher(void *philo_void);
 
 // PHILO_ACTION
 void	philo_eat(t_env *env, t_philo *philo);
-void    print_action(t_env *env, t_philo *philo, t_action action);
+void print_action(t_env *env, t_philo *philo, t_action action, bool died);
 
 // HITMAN
 int	stop_simulation(t_env *env , bool flag);
 void	hitman(t_env *env);
-
+bool is_philo_full(t_env *env, t_philo *philo);
 
 #endif

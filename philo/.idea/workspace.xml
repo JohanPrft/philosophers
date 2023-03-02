@@ -23,34 +23,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c02eb1f8-a5cf-4c86-851d-6a2a481e31a6" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/Makefile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/include/philo.h" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/old_thread" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo" beforeDir="false" afterPath="$PROJECT_DIR$/philo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/philo.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/hitman.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/hitman.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/init.c" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sources/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/main.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/mutex.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/philo_actions.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/threads.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/sources/utils.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/utils.c" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/.nfs00000000046902e700000279" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/Makefile" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/include/philo.h" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/hitman.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/init.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/main.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/parsing.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/philo_action.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/philosophers.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philonew/sources/utils.c" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philopapo" beforeDir="false" afterPath="$PROJECT_DIR$/../philopapo" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../philoparis" beforeDir="false" afterPath="$PROJECT_DIR$/../philoparis" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/philo_action.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/philo_action.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sources/philosophers.c" beforeDir="false" afterPath="$PROJECT_DIR$/sources/philosophers.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/Makefile" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/Makefile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/include/philo.h" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/include/philo.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/hitman.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/hitman.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/init.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/init.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/main.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/main.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/philo_action.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/philo_action.c" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../philonew/sources/philosophers.c" beforeDir="false" afterPath="$PROJECT_DIR$/../philonew/sources/philosophers.c" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,6 +76,11 @@
         </entry>
       </map>
     </option>
+    <option name="projectSyncType">
+      <map>
+        <entry key="$PROJECT_DIR$" value="RE_IMPORT" />
+      </map>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -111,7 +103,7 @@
     "WebServerToolWindowFactoryState": "false",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
-    "last_opened_file_path": "/nfs/homes/jprofit/Documents/philo/philopapo",
+    "last_opened_file_path": "/home/johan/Documents/philo/philopapo",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -152,11 +144,6 @@
         <option name="CLION.COMPOUND.BUILD" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="CMakeRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" ELEVATE="false" USE_EXTERNAL_CONSOLE="false" PASS_PARENT_ENVS_2="true">
-      <method v="2">
-        <option name="com.jetbrains.cidr.execution.CidrBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Makefile Application.all" />
       <item itemvalue="Makefile Application.debug" />
@@ -180,6 +167,8 @@
       <workItem from="1677252566649" duration="3696000" />
       <workItem from="1677664785440" duration="6871000" />
       <workItem from="1677674750762" duration="10223000" />
+      <workItem from="1677758308888" duration="1040000" />
+      <workItem from="1677759357682" duration="7053000" />
     </task>
     <servers />
   </component>
@@ -191,7 +180,7 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="com.jetbrains.cidr.execution.debugger.OCBreakpointType">
           <url>file://$PROJECT_DIR$/sources/hitman.c</url>
-          <line>74</line>
+          <line>86</line>
           <option name="timeStamp" value="5" />
         </line-breakpoint>
       </breakpoints>

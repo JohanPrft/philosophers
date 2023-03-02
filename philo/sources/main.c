@@ -16,7 +16,7 @@ int	start_simulation(t_env *env, t_philo *philo)
 {
 	int i;
 
-	env->start_time_ms = get_time_ms() + 1000;
+	env->start_time_ms = get_time_ms() + 500;
 	i = -1;
 	while (++i < env->nb_philo)
 	{

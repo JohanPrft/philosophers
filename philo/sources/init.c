@@ -82,6 +82,7 @@ int	init_philo(t_env *env, t_philo **philo)
 	env->philo = *philo;
 	if (mutex_init(env))
 		return (write_error(STR_ERR_MUTEX, env));
+	(*philo)[i].ate_enough = false;
 	return (SUCCESS);
 }
 

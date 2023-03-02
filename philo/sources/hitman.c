@@ -34,9 +34,8 @@ bool	is_philo_dead(t_env *env, t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_meal);
 	if ((get_time_ms() - philo->last_meal) >= env->time_to_die)
 	{
-		//printf ("%ld >= %ld\n", get_time_ms() - philo->last_meal, env->time_to_die);
 		stop_simulation(env, true);
-		print_action(env, philo, DIED);
+		print_action(env, philo, DIED, true);
 		pthread_mutex_unlock(&philo->mutex_meal);
 		return (true);
 	}
@@ -51,21 +50,34 @@ bool is_philo_full(t_env *env, t_philo *philo)
 	pthread_mutex_lock(&philo->mutex_meal);
 	if (philo->nb_meal >= env->max_meal)
 	{
+//		printf("philo %i ate enough\n", philo->index);
+		philo->ate_enough = true;
 		pthread_mutex_unlock(&philo->mutex_meal);
-		stop_simulation(env, true);
 		return (true);
 	}
 	pthread_mutex_unlock(&philo->mutex_meal);
 	return (false);
 }
 
-void	unlock_tab_fork(t_env *env)
+bool are_philo_full(t_env *env)
 {
+	t_philo *philo;
 	int i;
 
+	philo = env->philo;
 	i = -1;
 	while (++i < env->nb_philo)
-		pthread_mutex_unlock(&env->mutex_tab_fork[i]);
+	{
+		pthread_mutex_lock(&philo[i].mutex_meal);
+		if (philo[i].ate_enough == false)
+		{
+			pthread_mutex_unlock(&philo[i].mutex_meal);
+			return (false);
+		}
+		pthread_mutex_unlock(&philo[i].mutex_meal);
+	}
+	stop_simulation(env, true);
+	return (true);
 }
 
 void	hitman(t_env *env)
@@ -78,11 +90,8 @@ void	hitman(t_env *env)
 		i = -1;
 		while (stop_simulation(env, false) == false && ++i < env->nb_philo)
 		{
-			if (is_philo_dead(env, &env->philo[i]) || is_philo_full(env, &env->philo[i]))
-			{
-				unlock_tab_fork(env);
+			if (is_philo_dead(env, &env->philo[i]) || are_philo_full(env))
 				return;
-			}
 		}
 	}
 }
