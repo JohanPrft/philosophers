@@ -19,9 +19,9 @@ int	write_error(char *str, t_env *env)
 	return (ERROR);
 }
 
-int mutex_init(t_env *env)
+int	mutex_init(t_env *env)
 {
-	int i;
+	int	i;
 
 	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
 	i = -1;
@@ -62,8 +62,8 @@ void	assign_forks(t_env *env, t_philo *philo, int i_philo)
  */
 int	init_philo(t_env *env, t_philo **philo)
 {
-	int i;
-	int subject_i;
+	int	i;
+	int	subject_i;
 
 	*philo = malloc(sizeof(**philo) * env->nb_philo);
 	if (!*philo)
@@ -85,12 +85,3 @@ int	init_philo(t_env *env, t_philo **philo)
 	(*philo)[i].ate_enough = false;
 	return (SUCCESS);
 }
-
-/*
- * 	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
-	if (mutex_init(env) != 1)
-	{
-		free(philo);
-		return (0);
-	}
- */

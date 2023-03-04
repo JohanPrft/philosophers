@@ -31,17 +31,18 @@ void	philo_eat(t_env *env, t_philo *philo)
 	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id - 1]);
 }
 
-void print_action(t_env *env, t_philo *philo, t_action action, bool died)
+void	print_action(t_env *env, t_philo *philo, t_action action, bool died)
 {
-	static char *tab_action[] = {"is eating", "has taken a fork", "is sleeping", "is thinking", "died"};
+	static char	*tab_action[] = \
+	{"is eating", "has taken a fork", "is sleeping", "is thinking", "died"};
 
 	pthread_mutex_lock(&env->mutex_print);
 	if (stop_simulation(env, false) == true && died == false)
 	{
 		pthread_mutex_unlock(&env->mutex_print);
-		return;
+		return ;
 	}
-	printf("%li %i %s\n", get_time_ms() - env->start_time_ms, philo->index, tab_action[action]);
+	printf("%li %i %s\n", \
+	get_time_ms() - env->start_time_ms, philo->index, tab_action[action]);
 	pthread_mutex_unlock(&env->mutex_print);
-
 }

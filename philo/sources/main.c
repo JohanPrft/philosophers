@@ -14,21 +14,23 @@
 
 int	start_simulation(t_env *env, t_philo *philo)
 {
-	int i;
+	int	i;
 
 	env->start_time_ms = get_time_ms() + 500;
 	i = -1;
 	while (++i < env->nb_philo)
 	{
-		if (pthread_create(&philo[i].thread_id, NULL, &philosopher, &(philo[i])))
+		if (pthread_create \
+		(&philo[i].thread_id, NULL, &philosopher, &(philo[i])))
 			return (ERROR);
 	}
 	hitman(env);
 	return (SUCCESS);
 }
+
 int	end_simulation(t_env *env, t_philo *philo)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (++i < env->nb_philo)

@@ -26,24 +26,31 @@ int	check_only_int(const char *str)
 	return (1);
 }
 
-int parsing(char **argv, int argc, t_env *env)
+bool	check_arg(char **argv, int argc)
 {
 	int	i;
 
-	env->mutex_tab_fork = NULL;
-	env->philo = NULL;
 	if (argc < 5 || argc > 6)
 		return (ERROR);
 	i = 0;
 	while (++i < argc)
 		if (!check_only_int(argv[i]))
 			return (ERROR);
+	return (SUCCESS);
+}
+
+int	parsing(char **argv, int argc, t_env *env)
+{
+	env->mutex_tab_fork = NULL;
+	env->philo = NULL;
+	if (check_arg(argv, argc) != SUCCESS)
+		return (ERROR);
 	env->nb_philo = ft_atoi(argv[1]);
 	env->time_to_die = ft_atoi(argv[2]);
 	env->time_to_eat = ft_atoi(argv[3]);
 	env->time_to_sleep = ft_atoi(argv[4]);
 	if (env->nb_philo < 1 || env->nb_philo > 200 || env->time_to_die < 0 \
- || env->time_to_eat < 0 || env->time_to_sleep < 0)
+		|| env->time_to_eat < 0 || env->time_to_sleep < 0)
 		return (ERROR);
 	if (argc == 6)
 	{

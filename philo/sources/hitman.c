@@ -19,7 +19,7 @@
  */
 int	stop_simulation(t_env *env, bool flag)
 {
-	int temp;
+	int	temp;
 
 	pthread_mutex_lock(&env->mutex_stop_simu);
 	if (flag == true)
@@ -43,14 +43,13 @@ bool	is_philo_dead(t_env *env, t_philo *philo)
 	return (false);
 }
 
-bool is_philo_full(t_env *env, t_philo *philo)
+bool	is_philo_full(t_env *env, t_philo *philo)
 {
 	if (env->max_meal == -1)
 		return (false);
 	pthread_mutex_lock(&philo->mutex_meal);
 	if (philo->nb_meal >= env->max_meal)
 	{
-//		printf("philo %i ate enough\n", philo->index);
 		philo->ate_enough = true;
 		pthread_mutex_unlock(&philo->mutex_meal);
 		return (true);
@@ -59,10 +58,10 @@ bool is_philo_full(t_env *env, t_philo *philo)
 	return (false);
 }
 
-bool are_philo_full(t_env *env)
+bool	are_philo_full(t_env *env)
 {
-	t_philo *philo;
-	int i;
+	t_philo	*philo;
+	int		i;
 
 	philo = env->philo;
 	i = -1;
@@ -82,7 +81,7 @@ bool are_philo_full(t_env *env)
 
 void	hitman(t_env *env)
 {
-	int i;
+	int	i;
 
 	start_synchro(env->start_time_ms);
 	while (stop_simulation(env, false) == false)
@@ -91,7 +90,7 @@ void	hitman(t_env *env)
 		while (stop_simulation(env, false) == false && ++i < env->nb_philo)
 		{
 			if (is_philo_dead(env, &env->philo[i]) || are_philo_full(env))
-				return;
+				return ;
 		}
 	}
 }

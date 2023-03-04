@@ -29,7 +29,7 @@ void	*alone_philo(t_env *env, t_philo *philo)
 	return (NULL);
 }
 
-void	set_last_meal (t_env *env, t_philo *philo)
+void	set_last_meal(t_env *env, t_philo *philo)
 {
 	pthread_mutex_lock(&philo->mutex_meal);
 	philo->last_meal = env->start_time_ms;
@@ -58,6 +58,8 @@ void	*philosopher(void *philo_void)
 		print_action(env, philo, SLEEP, false);
 		usleep_better(env->time_to_sleep);
 		print_action(env, philo, THINK, false);
+		if (env->nb_philo % 2 == 1)
+			usleep_better(env->time_to_die / env->nb_philo);
 	}
 	return (NULL);
 }

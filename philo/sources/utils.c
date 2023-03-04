@@ -48,9 +48,9 @@ long long	get_time_since_ms(long long start_time)
 	return (get_time_ms() - start_time);
 }
 
-void usleep_better(time_t usec)
+void	usleep_better(time_t usec)
 {
-	long long timestamp;
+	long long	timestamp;
 
 	timestamp = get_time_ms() + usec;
 	while (get_time_ms() < timestamp)
@@ -59,11 +59,11 @@ void usleep_better(time_t usec)
 
 void	clean(t_env *env)
 {
+	free (env->mutex_tab_fork);
+	free (env->philo);
+}
 //	int i;
 //	pthread_mutex_destroy(&env->mutex_print);
 //	while (i < env->nb_philo)
 //		if (pthread_mutex_destroy(&env->mutex_tab_fork[i]))
 //			return (write_error())
-	free (env->mutex_tab_fork);
-	free (env->philo);
-}

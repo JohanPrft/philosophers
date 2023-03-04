@@ -18,7 +18,7 @@ NAME			=	philo
 
 # ---- Directories ---- #
 
-DIR_OBJS		=	bin/
+DIR_OBJS		=	.bin/
 
 DIR_SRCS		=	sources/
 
@@ -37,7 +37,7 @@ OBJS			=	${SRCS_LIST:%.c=${DIR_OBJS}%.o}
 
 # ---- Compilation ---- #
 
-CFLAGS			=	-Wall -Wextra -g -pthread -fsanitize=thread #########  ADD -Werror !!!!!!!! #########
+CFLAGS			=	-Wall -Wextra -g -pthread ######### -fsanitize=thread  ADD -Werror !!!!!!!! #########
 
 # ---- Commands ---- #
 
