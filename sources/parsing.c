@@ -39,6 +39,10 @@ bool	check_arg(char **argv, int argc)
 	return (SUCCESS);
 }
 
+/*
+ * fill the env struct with presets and infos given by the user
+ * can return an error if info aren't valid
+ */
 int	parsing(char **argv, int argc, t_env *env)
 {
 	env->mutex_tab_fork = NULL;

@@ -26,6 +26,7 @@
 ./philo <nb_philo> <time_to_die> <time_to_eat> <time_to_sleep> (<max_nb_eat>)"
 # define STR_ERR_MALLOC "Memory allocation failed"
 # define STR_ERR_MUTEX "Initialisation of a mutex failed"
+# define STR_ERR_MUTEX_DESTROY "Destroy of a mutex failed"
 # define STR_ERR_THREAD "Creation of a thread failed"
 
 typedef struct timeval	t_tval;
@@ -70,13 +71,13 @@ struct s_philo {
 int		ft_atoi(const char *str);
 time_t	get_time_ms(void);
 void	usleep_better(time_t usec);
-void	clean(t_env *env);
+bool	clean(t_env *env);
+int		write_error(char *str, t_env *env);
 
 // PARSING
 int		parsing(char **argv, int argc, t_env *env);
 
 // INIT
-int		write_error(char *str, t_env *env);
 int		init_philo(t_env *env, t_philo **philo);
 
 // PHILOSOPHERS

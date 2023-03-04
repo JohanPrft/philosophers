@@ -12,13 +12,6 @@
 
 #include "../include/philo.h"
 
-int	write_error(char *str, t_env *env)
-{
-	clean(env);
-	fprintf(stderr, "%s\n", str);
-	return (ERROR);
-}
-
 int	mutex_init(t_env *env)
 {
 	int	i;
@@ -36,10 +29,10 @@ int	mutex_init(t_env *env)
 }
 
 /*
- * assigning forks for each philo is different half the time
- * otherwise it can lead to deadlock :
- * a philo lock a mutex for the first fork, then wait for the second one
- * who had been taken by a second philo waiting for the first one
+ * assigning forks for odd and even philo must be different
+ * otherwise it can lead to deadlock
+ * e.g : a philo lock the mutex of his first fork, then wait for the second one
+ * but it had been taken by a second philo who's now waiting for the first one
  */
 void	assign_forks(t_env *env, t_philo *philo, int i_philo)
 {
@@ -57,7 +50,7 @@ void	assign_forks(t_env *env, t_philo *philo, int i_philo)
 
 /*
  * init_philo:
- * create and allocate an array of philosopher with all infos
+ * allocate and sets up an array of philosopher
  * due to subject first philo has an index (philo.index) of 1
  */
 int	init_philo(t_env *env, t_philo **philo)

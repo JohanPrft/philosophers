@@ -21,6 +21,10 @@ void	start_synchro(long long start_time)
 		continue ;
 }
 
+/*
+ * needed for the philo to not be stuck with a fork and waiting forever
+ * for one that doesnt exist
+ */
 void	*alone_philo(t_env *env, t_philo *philo)
 {
 	print_action(env, philo, THINK, false);
@@ -36,6 +40,13 @@ void	set_last_meal(t_env *env, t_philo *philo)
 	pthread_mutex_unlock(&philo->mutex_meal);
 }
 
+/*
+ * philosophers will live when start_time_ms will be reached (leaving time
+ * for all of them and the hitman to be set up)
+ * odd philo will start to thing to avoid chaos when they start to live
+ * if the number of philo is odd a small time to sleep is imposed to prevent
+ * them to eat (uselessly) again
+ */
 void	*philosopher(void *philo_void)
 {
 	t_philo	*philo;

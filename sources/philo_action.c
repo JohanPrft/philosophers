@@ -31,6 +31,9 @@ void	philo_eat(t_env *env, t_philo *philo)
 	pthread_mutex_unlock(&env->mutex_tab_fork[philo->left_fork_id - 1]);
 }
 
+/*
+ * the bool is needed to print the dead of a philo and nothing after
+ */
 void	print_action(t_env *env, t_philo *philo, t_action action, bool died)
 {
 	static char	*tab_action[] = \

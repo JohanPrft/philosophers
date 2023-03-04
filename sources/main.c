@@ -12,6 +12,10 @@
 
 #include "../include/philo.h"
 
+/*
+ * set the starting time and create a thread by philosopher
+ * main program goes into the hitman function
+ */
 int	start_simulation(t_env *env, t_philo *philo)
 {
 	int	i;

@@ -43,27 +43,39 @@ time_t	get_time_ms(void)
 	return (time.tv_sec * 1000 + time.tv_usec / 1000);
 }
 
-long long	get_time_since_ms(long long start_time)
-{
-	return (get_time_ms() - start_time);
-}
-
 void	usleep_better(time_t usec)
 {
-	long long	timestamp;
+	time_t	timestamp;
 
 	timestamp = get_time_ms() + usec;
 	while (get_time_ms() < timestamp)
 		usleep(100);
 }
 
-void	clean(t_env *env)
+bool	clean(t_env *env)
 {
+	int	i;
+
+	if (pthread_mutex_destroy(&env->mutex_print))
+		return (ERROR);
+	if (pthread_mutex_destroy(&env->mutex_stop_simu))
+		return (ERROR);
+	i = 0;
+	while (++i < env->nb_philo)
+	{
+		if (pthread_mutex_destroy(&env->mutex_tab_fork[i]))
+			return (ERROR);
+		if (pthread_mutex_destroy(&env->philo[i].mutex_meal))
+			return (ERROR);
+	}
 	free (env->mutex_tab_fork);
 	free (env->philo);
+	return (SUCCESS);
 }
-//	int i;
-//	pthread_mutex_destroy(&env->mutex_print);
-//	while (i < env->nb_philo)
-//		if (pthread_mutex_destroy(&env->mutex_tab_fork[i]))
-//			return (write_error())
+
+int	write_error(char *str, t_env *env)
+{
+	clean(env);
+	printf("%s\n", str);
+	return (ERROR);
+}
