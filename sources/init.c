@@ -17,6 +17,8 @@ int	mutex_init(t_env *env)
 	int	i;
 
 	env->mutex_tab_fork = malloc(sizeof(pthread_mutex_t) * env->nb_philo);
+	if (!env->mutex_tab_fork)
+		return (ERROR);
 	i = -1;
 	while (++i < env->nb_philo)
 		if (pthread_mutex_init(&env->mutex_tab_fork[i], 0))
