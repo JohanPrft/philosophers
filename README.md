@@ -6,4 +6,4 @@ First project done only on linux (stricter that on MacOS) -> pass valgrind and h
 
 Use : `make && ./philo <nb_philo> <time_to_die> <time_to_eat> <time_to_sleep> (<nb_must_eat>)`
 
-p.s to devs using this, sometimes valgrind trows an error about an uninitialized value, if you have any hint of how can i fix this i would like to hear from you
+p.s : to devs using this, sometimes valgrind trows an error about an uninitialized value, if you have any hint of how can i fix this i would like to hear from you
